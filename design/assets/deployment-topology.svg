@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 15px Arial, sans-serif; fill: #0f172a; }
+      .small { font: 13px Arial, sans-serif; fill: #475569; }
+      .region { fill: #f8fafc; stroke: #94a3b8; stroke-width: 2; rx: 12; }
+      .az { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; rx: 10; }
+      .pod { fill: #e0f2fe; stroke: #0369a1; stroke-width: 2; rx: 8; }
+      .control { fill: #ede9fe; stroke: #7c3aed; stroke-width: 2; rx: 8; }
+      .data { fill: #ecfdf5; stroke: #047857; stroke-width: 2; rx: 8; }
+      .edge { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1280" height="760" fill="#ffffff"/>
+  <text x="40" y="54" class="title">Multi-AZ Deployment Topology</text>
+  <text x="40" y="82" class="small">EKS pods spread across 3 AZs with HPA, PDB, Redis, and PostgreSQL protection</text>
+
+  <rect x="40" y="120" width="1200" height="620" class="region"/>
+  <text x="65" y="150" class="label">AWS Region</text>
+
+  <rect x="85" y="195" width="290" height="275" class="az"/>
+  <text x="110" y="225" class="label">AZ 1</text>
+  <rect x="125" y="265" width="210" height="58" class="pod"/>
+  <text x="178" y="300" class="label">Discount Pods</text>
+  <rect x="125" y="350" width="210" height="58" class="pod"/>
+  <text x="156" y="385" class="label">EKS Worker Nodes</text>
+
+  <rect x="455" y="195" width="290" height="275" class="az"/>
+  <text x="480" y="225" class="label">AZ 2</text>
+  <rect x="495" y="265" width="210" height="58" class="pod"/>
+  <text x="548" y="300" class="label">Discount Pods</text>
+  <rect x="495" y="350" width="210" height="58" class="pod"/>
+  <text x="526" y="385" class="label">EKS Worker Nodes</text>
+
+  <rect x="825" y="195" width="290" height="275" class="az"/>
+  <text x="850" y="225" class="label">AZ 3</text>
+  <rect x="865" y="265" width="210" height="58" class="pod"/>
+  <text x="918" y="300" class="label">Discount Pods</text>
+  <rect x="865" y="350" width="210" height="58" class="pod"/>
+  <text x="896" y="385" class="label">EKS Worker Nodes</text>
+
+  <rect x="110" y="535" width="220" height="72" class="control"/>
+  <text x="175" y="563" class="label">HPA</text>
+  <text x="133" y="586" class="small">CPU + in-flight requests</text>
+
+  <rect x="405" y="535" width="220" height="72" class="control"/>
+  <text x="500" y="563" class="label">PDB</text>
+  <text x="428" y="586" class="small">minAvailable 80%</text>
+
+  <rect x="700" y="535" width="220" height="72" class="data"/>
+  <text x="758" y="563" class="label">ElastiCache Redis</text>
+  <text x="740" y="586" class="small">Rules + computed results</text>
+
+  <rect x="980" y="535" width="190" height="72" class="data"/>
+  <text x="1015" y="563" class="label">RDS PostgreSQL</text>
+  <text x="1022" y="586" class="small">Multi-AZ rules DB</text>
+
+  <path d="M220 535 C220 500 230 470 230 410" class="edge"/>
+  <path d="M515 535 C515 505 430 480 335 410" class="edge"/>
+  <path d="M810 535 C760 490 675 430 600 323" class="edge"/>
+  <path d="M810 535 C840 490 910 430 970 323" class="edge"/>
+  <path d="M920 571 H980" class="edge"/>
+</svg>

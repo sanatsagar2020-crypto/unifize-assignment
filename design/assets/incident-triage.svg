@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="860" viewBox="0 0 1280 860">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 15px Arial, sans-serif; fill: #0f172a; }
+      .small { font: 13px Arial, sans-serif; fill: #475569; }
+      .start { fill: #fee2e2; stroke: #b91c1c; stroke-width: 2; rx: 8; }
+      .decision { fill: #fef3c7; stroke: #b45309; stroke-width: 2; }
+      .action { fill: #e0f2fe; stroke: #0369a1; stroke-width: 2; rx: 8; }
+      .watch { fill: #ecfdf5; stroke: #047857; stroke-width: 2; rx: 8; }
+      .edge { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .text { font: 12px Arial, sans-serif; fill: #334155; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="860" fill="#ffffff"/>
+  <text x="40" y="54" class="title">3 AM Latency Incident Triage</text>
+  <text x="40" y="82" class="small">Runbook flow for p99 above 150 ms for 10 minutes</text>
+
+  <rect x="475" y="115" width="330" height="64" class="start"/>
+  <text x="520" y="141" class="label">Alert: p99 latency breach</text>
+  <text x="530" y="164" class="small">calculate_cart_discounts &gt; 150 ms</text>
+
+  <polygon points="640,235 810,305 640,375 470,305" class="decision"/>
+  <text x="562" y="300" class="label">Recent app deploy</text>
+  <text x="578" y="321" class="label">or rule change?</text>
+
+  <rect x="100" y="270" width="230" height="72" class="action"/>
+  <text x="145" y="299" class="label">Rollback change</text>
+  <text x="127" y="322" class="small">App image or rule version</text>
+
+  <polygon points="640,430 810,500 640,570 470,500" class="decision"/>
+  <text x="568" y="496" class="label">Redis slow or</text>
+  <text x="575" y="517" class="label">hit ratio falling?</text>
+
+  <rect x="930" y="465" width="250" height="72" class="action"/>
+  <text x="968" y="494" class="label">Redis mitigation</text>
+  <text x="950" y="517" class="small">Use stale/local rules, reduce writes</text>
+
+  <polygon points="640,615 810,685 640,755 470,685" class="decision"/>
+  <text x="556" y="681" class="label">PostgreSQL p99 or</text>
+  <text x="575" y="702" class="label">pool wait high?</text>
+
+  <rect x="100" y="650" width="260" height="72" class="action"/>
+  <text x="147" y="679" class="label">DB mitigation</text>
+  <text x="121" y="702" class="small">Find slow query, cap DB concurrency</text>
+
+  <rect x="930" y="650" width="250" height="72" class="action"/>
+  <text x="978" y="679" class="label">Scale app tier</text>
+  <text x="951" y="702" class="small">Raise HPA min, check throttling</text>
+
+  <rect x="475" y="790" width="330" height="56" class="watch"/>
+  <text x="545" y="823" class="label">Watch checkout latency, errors, fallback rate</text>
+
+  <path d="M640 179 V235" class="edge"/>
+  <path d="M470 305 H330" class="edge"/>
+  <text x="382" y="292" class="text">Yes</text>
+  <path d="M640 375 V430" class="edge"/>
+  <text x="652" y="405" class="text">No</text>
+  <path d="M810 500 H930" class="edge"/>
+  <text x="862" y="488" class="text">Yes</text>
+  <path d="M640 570 V615" class="edge"/>
+  <text x="652" y="596" class="text">No</text>
+  <path d="M470 685 H360" class="edge"/>
+  <text x="410" y="672" class="text">Yes</text>
+  <path d="M810 685 H930" class="edge"/>
+  <text x="862" y="672" class="text">No</text>
+
+  <path d="M215 342 C215 790 420 818 475 818" class="edge"/>
+  <path d="M1055 537 C1055 760 850 818 805 818" class="edge"/>
+  <path d="M230 722 C230 805 410 818 475 818" class="edge"/>
+  <path d="M1055 722 C1055 805 860 818 805 818" class="edge"/>
+</svg>

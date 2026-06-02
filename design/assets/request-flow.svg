@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 28px Arial, sans-serif; fill: #0f172a; }
+      .label { font: 600 16px Arial, sans-serif; fill: #0f172a; }
+      .small { font: 13px Arial, sans-serif; fill: #475569; }
+      .lane { stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 7 6; }
+      .box { fill: #ffffff; stroke: #334155; stroke-width: 2; rx: 8; }
+      .service { fill: #e0f2fe; stroke: #0369a1; }
+      .cache { fill: #ecfdf5; stroke: #047857; }
+      .db { fill: #fef3c7; stroke: #b45309; }
+      .edge { stroke: #334155; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+      .return { stroke: #64748b; stroke-width: 2; stroke-dasharray: 6 5; fill: none; marker-end: url(#arrow); }
+      .note { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1.5; rx: 8; }
+    </style>
+  </defs>
+
+  <rect width="1280" height="820" fill="#ffffff"/>
+  <text x="40" y="54" class="title">Checkout Discount Request Flow</text>
+  <text x="40" y="82" class="small">Cache-first lookup, versioned rules, deterministic calculation</text>
+
+  <rect x="70" y="120" width="185" height="58" class="box service"/>
+  <text x="108" y="155" class="label">Checkout Service</text>
+
+  <rect x="400" y="120" width="190" height="58" class="box service"/>
+  <text x="445" y="155" class="label">Discount Service</text>
+
+  <rect x="745" y="120" width="150" height="58" class="box cache"/>
+  <text x="793" y="155" class="label">Redis</text>
+
+  <rect x="1035" y="120" width="170" height="58" class="box db"/>
+  <text x="1078" y="155" class="label">PostgreSQL</text>
+
+  <line x1="162" y1="178" x2="162" y2="750" class="lane"/>
+  <line x1="495" y1="178" x2="495" y2="750" class="lane"/>
+  <line x1="820" y1="178" x2="820" y2="750" class="lane"/>
+  <line x1="1120" y1="178" x2="1120" y2="750" class="lane"/>
+
+  <path d="M162 225 H495" class="edge"/>
+  <text x="210" y="212" class="small">1. calculate_cart_discounts(cart, customer, payment)</text>
+
+  <rect x="390" y="255" width="210" height="58" class="note"/>
+  <text x="420" y="278" class="small">2. Validate request</text>
+  <text x="420" y="300" class="small">Build versioned lookup key</text>
+
+  <path d="M495 350 H820" class="edge"/>
+  <text x="560" y="337" class="small">3. Get computed result</text>
+
+  <path d="M820 395 H495" class="return"/>
+  <text x="585" y="382" class="small">4a. Cache hit: return DiscountedPrice</text>
+
+  <path d="M495 452 H820" class="edge"/>
+  <text x="562" y="439" class="small">4b. Cache miss: get active rules</text>
+
+  <path d="M820 505 H1120" class="edge"/>
+  <text x="868" y="492" class="small">5. Rule cache miss: query active rules</text>
+
+  <path d="M1120 560 H495" class="return"/>
+  <text x="730" y="547" class="small">6. Matching brand, category, bank, voucher rules</text>
+
+  <rect x="390" y="600" width="210" height="72" class="note"/>
+  <text x="413" y="624" class="small">7. Apply rules, caps,</text>
+  <text x="413" y="645" class="small">stacking order, and</text>
+  <text x="413" y="666" class="small">voucher validation</text>
+
+  <path d="M495 705 H820" class="edge"/>
+  <text x="560" y="692" class="small">8. Cache computed result with short TTL</text>
+
+  <path d="M495 750 H162" class="return"/>
+  <text x="230" y="736" class="small">9. Return final_price + applied_discounts</text>
+</svg>
